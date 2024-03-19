@@ -85,6 +85,16 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+    @Step("Make a Delete-request with auth_cookie and token")
+    public Response makeDeleteRequest(String url, String cookie, String token) {
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header("x-csrf-token", token))
+                .cookie ("auth_sid",cookie)
+                .delete(url)
+                .andReturn();
+    }
+
 
 
 
