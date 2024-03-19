@@ -2,6 +2,7 @@ package tests;
 import Lib.Assertions;
 import Lib.BaseTestCase;
 import Lib.ApiCoreRequests;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,15 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 
 
 @Epic("Authorization cases")
 @Feature("Authorization")
-public class UserAuthTest extends BaseTestCase {
+@Stories({@Story("User should be authorized when authorization cookie and token are provided"),
+        @Story("User shouldn't be authorized when both or only cookie/token are provided")})
+
+        public class UserAuthTest extends BaseTestCase {
 
     String cookie;
     String header;
@@ -45,6 +46,8 @@ public class UserAuthTest extends BaseTestCase {
     @Test
     @Description("This test successfully authorize user by email and password")
     @DisplayName("Test positive auth user")
+    @Owner("LearnQA")
+    @Severity(SeverityLevel.CRITICAL)
     public void testAuthUser(){
                Response responseCheckAuth = ApiCoreRequests
                 .makeGetRequest(
@@ -57,6 +60,8 @@ public class UserAuthTest extends BaseTestCase {
 
     @Description("This test checks authorization status w/o sending aut cookie or token")
     @DisplayName("Test negative auth user")
+    @Owner("LearnQA")
+    @Severity(SeverityLevel.CRITICAL)
     @ParameterizedTest
     @ValueSource(strings={"cookie", "headers"})
 

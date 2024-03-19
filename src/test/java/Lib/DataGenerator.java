@@ -1,15 +1,20 @@
 package Lib;
+import io.qameta.allure.Attachment;
+
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DataGenerator {
+
+    @Attachment()
     public static String getRandomEmail(){
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
         return "learnqa" + timestamp + "@example.com";
 
     }
 
+    @Attachment()
     public static Map<String,String> getRegistrationData(){
         Map<String,String> data = new HashMap<>();
         data.put("email", DataGenerator.getRandomEmail());
@@ -21,6 +26,7 @@ public class DataGenerator {
 
     }
 
+    @Attachment
     public static Map<String,String> getRegistrationData(Map<String,String> nonDefaultValues){
         Map<String,String> defaultValues = DataGenerator.getRegistrationData();
 

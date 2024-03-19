@@ -5,17 +5,29 @@ import Lib.Assertions;
 import Lib.BaseTestCase;
 
 import Lib.DataGenerator;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Epic("CRUD")
+@Feature("Read User")
+@Stories({@Story("Not possible to read user data without auth"),
+        @Story("Possible to read user with authorization"),
+        @Story("Not possible to read user with authorization under another user")})
+
 public class UserGetTest extends BaseTestCase {
 
     private final Lib.ApiCoreRequests ApiCoreRequests = new ApiCoreRequests();
     @Test
+    @Description("This test unsuccessfully read user w/o auth")
+    @DisplayName("Test negative read user w/o auth")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.CRITICAL)
 
     public void testGetUserDataNotAuth(){
         Response responseUserData = RestAssured
@@ -31,6 +43,10 @@ public class UserGetTest extends BaseTestCase {
     }
 
     @Test
+    @Description("This test successfully read user with auth")
+    @DisplayName("Test positive read user witho auth")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.NORMAL)
     public void testGetUserDataAuthAsSameUser(){
 
         Map<String, String> authData = new HashMap<>();
@@ -58,6 +74,10 @@ public class UserGetTest extends BaseTestCase {
     }
 
     @Test
+    @Description("This test unsuccessfully read user data when auth with other user")
+    @DisplayName("Test negative read user data when auth with other user")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.CRITICAL)
     public void testGetUserDataAuthAsOtherUser(){
 
         Map<String,String> userData = DataGenerator.getRegistrationData();

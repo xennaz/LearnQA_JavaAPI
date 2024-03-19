@@ -1,4 +1,5 @@
 package Lib;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -11,6 +12,7 @@ import static io.restassured.RestAssured.given;
 public class ApiCoreRequests {
 
     @Step("Make a GET-request with auth_cookie and token")
+    @Attachment()
     public Response makeGetRequest(String url, String cookie, String token) {
         return given()
                 .filter(new AllureRestAssured())
@@ -21,6 +23,7 @@ public class ApiCoreRequests {
     }
 
     @Step("Make a GET-request with auth_cookie only")
+    @Attachment()
     public Response makeGetRequestWithCookie(String url, String cookie) {
         return given()
                 .filter(new AllureRestAssured())
@@ -30,6 +33,7 @@ public class ApiCoreRequests {
     }
 
     @Step("Make a GET-request with token only")
+    @Attachment()
     public Response makeGetRequestWithHeader(String url, String token) {
         return given()
                 .filter(new AllureRestAssured())
@@ -39,6 +43,7 @@ public class ApiCoreRequests {
     }
 
     @Step("Make a Post-request for Auth")
+    @Attachment()
     public Response makePostRequest(String url, Map<String, String> authData) {
         return given()
                 .filter(new AllureRestAssured())
@@ -48,6 +53,7 @@ public class ApiCoreRequests {
     }
 
     @Step("Make a Post-request for Registration")
+    @Attachment()
     public Response makePostRequestReg(String url, Map<String, String> userData) {
         return given()
                 .filter(new AllureRestAssured())
@@ -57,6 +63,7 @@ public class ApiCoreRequests {
     }
 
     @Step ("Make a Post_request for Registration with parsing data")
+    @Attachment()
     public JsonPath makePostRequestRegJsonpath(String url, Map<String, String> userData) {
         return given()
                 .filter(new AllureRestAssured())
@@ -66,6 +73,7 @@ public class ApiCoreRequests {
     }
 
     @Step("Make a Put_request without authorithation")
+    @Attachment()
     public Response makePutRequestWOAuth(String url, Map<String, String> editData) {
         return given()
                 .filter(new AllureRestAssured())
@@ -75,6 +83,7 @@ public class ApiCoreRequests {
     }
 
     @Step ("Make a Put_request with authorithation")
+    @Attachment()
     public Response makePutRequestWithAuth(String url, Map<String, String> editData,String cookie, String token) {
         return given()
                 .filter(new AllureRestAssured())
@@ -86,6 +95,7 @@ public class ApiCoreRequests {
     }
 
     @Step("Make a Delete-request with auth_cookie and token")
+    @Attachment()
     public Response makeDeleteRequest(String url, String cookie, String token) {
         return given()
                 .filter(new AllureRestAssured())

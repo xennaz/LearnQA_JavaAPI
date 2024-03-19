@@ -4,17 +4,30 @@ import Lib.ApiCoreRequests;
 import Lib.Assertions;
 import Lib.BaseTestCase;
 import Lib.DataGenerator;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
+
+@Epic("CRUD")
+@Feature("Edit User")
+@Stories({@Story("New user can be edited"),
+        @Story("Not possible to edit user w/o authorization"),
+        @Story("Not possible to edit user when authorized under another user"),
+@Story("Not possible to edit user providing unacceptable data")})
 
 public class UserEditTest extends BaseTestCase {
     private final Lib.ApiCoreRequests ApiCoreRequests = new ApiCoreRequests();
 
     @Test
+    @Description("This test successfully edit new user")
+    @DisplayName("Test positive edit of new user")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.NORMAL)
 
     public void testEditJustCreatedTest(){
         //GENERATE USER
@@ -67,6 +80,10 @@ public class UserEditTest extends BaseTestCase {
     }
 
     @Test
+    @Description("This test unsuccessfully edit user w/o authorization")
+    @DisplayName("Test negative edit of user w/o auth")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.CRITICAL)
 
     public void testNegativeEditWithoutAuthorization(){
         //GENERATE USER
@@ -114,6 +131,10 @@ public class UserEditTest extends BaseTestCase {
 
 
     @Test
+    @Description("This test unsuccessfully edit user when authorized under another user")
+    @DisplayName("Test negative edit of user when auth under another user")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.CRITICAL)
 
     public void testNegativeEditAnotherUser() {
         //GENERATE USER
@@ -157,6 +178,10 @@ public class UserEditTest extends BaseTestCase {
     }
 
     @Test
+    @Description("This test unsuccessfully edit auth user with unacceptable data")
+    @DisplayName("Test negative edit of auth user for mew email w/o @")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.NORMAL)
 
     public void testNegativeEditWrongEmail() {
         //GENERATE USER
@@ -199,6 +224,10 @@ public class UserEditTest extends BaseTestCase {
     }
 
     @Test
+    @Description("This test unsuccessfully edit auth user with unacceptable data")
+    @DisplayName("Test negative edit of auth user for 1 symbol new firstname")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.NORMAL)
 
     public void testNegativeEditShortName() {
         //GENERATE USER

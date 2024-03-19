@@ -4,17 +4,30 @@ import Lib.ApiCoreRequests;
 import Lib.Assertions;
 import Lib.BaseTestCase;
 import Lib.DataGenerator;
+import io.qameta.allure.*;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Epic("CRUD")
+@Feature("Delete User")
+@Stories({@Story("Service user 2 is not possible to delete"),
+        @Story("When authorized user can be deleted"),
+@Story("Unauthorized user cannot be deleted")})
+
 public class UserDeleteTest extends BaseTestCase {
     private final Lib.ApiCoreRequests ApiCoreRequests = new ApiCoreRequests();
 
     @Test
+    @Description("This test unsuccessfully delete user2")
+    @DisplayName("Test negative delete of service user2")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.CRITICAL)
 
     public void testDeleteUser2() {
 
@@ -37,9 +50,13 @@ public class UserDeleteTest extends BaseTestCase {
     }
 
     @Test
+    @Description("This test successfully delete random user")
+    @DisplayName("Test positive delete of authorized user")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.NORMAL)
 
 
-    public void testSuccessfulDeleteUser() {
+    public void testSuccessfulDeleteAuthUser() {
         //GENERATE USER
 
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -81,6 +98,10 @@ public class UserDeleteTest extends BaseTestCase {
     }
 
     @Test
+    @Description("This test unsuccessfully delete user without authorization")
+    @DisplayName("Test negative delete of unauthorized user")
+    @Owner("xennaz")
+    @Severity(SeverityLevel.NORMAL)
 
     public void testNegativeDeleteUserWOAuth() {
         //GENERATE USER1
