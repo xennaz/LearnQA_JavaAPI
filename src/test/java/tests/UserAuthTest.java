@@ -50,8 +50,6 @@ public class UserAuthTest extends BaseTestCase {
                 .makeGetRequest(
                         "https://playground.learnqa.ru/api/user/auth",
                         this.cookie,this.header
-
-
                 );
 
         Assertions.AssertJsonByName(responseCheckAuth,"user_id", this.userIdOnAuth);
